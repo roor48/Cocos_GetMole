@@ -147,6 +147,10 @@
     "__prefab": {
       "__id__": 7
     },
+    "gameObject": {
+      "__id__": 1
+    },
+    "deletedTime": 1000,
     "_id": ""
   },
   {
@@ -162,6 +166,7 @@
       "__id__": 0
     },
     "fileId": "533+Jfsm9Mwphtqj4Cl/RF",
+    "instance": null,
     "targetOverrides": null
   }
 ]

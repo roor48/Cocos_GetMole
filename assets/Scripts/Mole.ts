@@ -6,9 +6,19 @@ const { ccclass, property } = _decorator;
 export class Mole extends Component {
 
     public gameManager;
+    tempTime = 0;
+    
+    @property({type:Node})
+    private gameObject: Node = null;
+    @property(Number)
+    public deletedTime = 1000;
 
     start() {
         this.gameManager = find("GameManager").getComponent("GameManager");
+
+        setTimeout(function() {
+            this.gameObject.active = false;
+        }.bind(this), this.deletedTime)
     }
 
     update(deltaTime: number) {
