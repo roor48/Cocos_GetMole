@@ -34,7 +34,7 @@ export class Mole extends Component {
 
         this.node.on(Node.EventType.TOUCH_START, () => {
             this.gameManager.addScore();
-            this.node.destroy();
+            this.node.active = false;
         })
     }
 }
