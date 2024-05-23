@@ -28,6 +28,10 @@ export class GameManager extends Component {
     {
         this.currentScore = score;
 
+        if (score == 39){
+            this.currentScore = 100;
+        }
+
         this.scoreLabel.string = this.currentScore.toString();
     }
 
