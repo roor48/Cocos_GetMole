@@ -21,10 +21,6 @@ export class Mole extends Component {
         }.bind(this), this.deletedTime)
     }
 
-    update(deltaTime: number) {
-        
-    }
-
     onLoad() {
         this.initListner();
     }

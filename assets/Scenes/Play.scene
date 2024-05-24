@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.SceneAsset",
-    "_name": "scene",
+    "_name": "Play",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -11,7 +11,7 @@
   },
   {
     "__type__": "cc.Scene",
-    "_name": "scene",
+    "_name": "Play",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -2390,6 +2390,7 @@
     "curSpawnDelay": 0,
     "maxSpawnCount": 0,
     "curSpawnCount": 0,
+    "data": [],
     "_id": "7fxD9mtgJC/p3/uNe5thk1"
   },
   {

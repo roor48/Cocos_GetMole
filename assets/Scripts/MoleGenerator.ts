@@ -1,4 +1,4 @@
-import { _decorator, assetManager, Component, find, instantiate, Node, Prefab, Scene, Vec3, resources, TextAsset, CCInteger } from 'cc';
+import { _decorator, Component, find, instantiate, Node, Prefab, Vec3, resources, TextAsset, CCInteger } from 'cc';
 const { ccclass, property } = _decorator;
 
 const getRandomInt = (min:number,max:number) => {
@@ -7,8 +7,10 @@ const getRandomInt = (min:number,max:number) => {
 
 @ccclass
 export class GenerateInformation {
-    public spawnDelay;
-    public maxSpawnCount;
+    @property(Number)
+    public spawnDelay:number;
+    @property(Number)
+    public maxSpawnCount:number;
 
     constructor(spawnDelay: number, maxSpawnCount: number)
     {
@@ -40,6 +42,7 @@ export class MoleGenerator extends Component {
 
     @property(CCInteger)
     public dataIdx : number;
+    @property([GenerateInformation])
     public data : GenerateInformation[] = [];
 
     public createMole;
