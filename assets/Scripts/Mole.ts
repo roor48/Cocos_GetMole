@@ -7,22 +7,19 @@ export class Mole extends Component {
 
     public gameManager;
     tempTime = 0;
-    
-    @property({type:Node})
-    private gameObject: Node = null;
+
     @property(Number)
     public deletedTime = 1000;
 
-    start() {
-        this.gameManager = find("GameManager").getComponent("GameManager");
-
+    protected onEnable(): void {
         setTimeout(function() {
-            this.gameObject.active = false;
+            this.node.active = false;
         }.bind(this), this.deletedTime)
     }
 
-    onLoad() {
+    start() {
         this.initListner();
+        this.gameManager = find("GameManager").getComponent("GameManager");
     }
 
     initListner(){

@@ -1,4 +1,5 @@
 import { _decorator, Component, find, instantiate, Node, Prefab, Vec3, resources, TextAsset, CCInteger } from 'cc';
+import { ObjectPool } from './ObjectPool';
 const { ccclass, property } = _decorator;
 
 const getRandomInt = (min:number,max:number) => {
@@ -26,30 +27,32 @@ export class MoleGenerator extends Component {
         tooltip: 'Put Mole Prefab Here'
     })
     public molePrefab: Prefab;
+    private molePool: ObjectPool;
 
     @property([Node])
     public moleParents : Node[] = [];
 
     @property(Number)
-    public maxSpawnDelay: number = 0;
+    private maxSpawnDelay: number = 0;
     @property(Number)
-    public curSpawnDelay: number = 0;
+    private curSpawnDelay: number = 0;
 
     @property(Number)
-    public maxSpawnCount: number = 0;
+    private maxSpawnCount: number = 0;
     @property(Number)
-    public curSpawnCount: number = 0;
+    private curSpawnCount: number = 0;
 
     @property(CCInteger)
     public dataIdx : number;
     @property([GenerateInformation])
     public data : GenerateInformation[] = [];
 
-    public createMole;
-    public canvas;
+    private createMole;
+    private canvas;
 
     start() {
         this.canvas = find('Canvas');
+        this.molePool = new ObjectPool(this.molePrefab);
         
         resources.load('MoleSpawnData', TextAsset, (err, textAsset) => {
             if (err) {
@@ -100,7 +103,7 @@ export class MoleGenerator extends Component {
             return;
         }
         
-        this.createMole = instantiate(this.molePrefab);
+        this.createMole = this.molePool.getNode();
         this.createMole.setParent(this.moleParents[getRandomInt(0, this.moleParents.length)]);
         this.createMole.setPosition(Vec3.ZERO);
         
