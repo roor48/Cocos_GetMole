@@ -35,8 +35,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 542.191,
-      "y": 266.172,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
@@ -147,9 +147,6 @@
     "__prefab": {
       "__id__": 7
     },
-    "gameObject": {
-      "__id__": 1
-    },
     "deletedTime": 1000,
     "_id": ""
   },
@@ -166,7 +163,6 @@
       "__id__": 0
     },
     "fileId": "533+Jfsm9Mwphtqj4Cl/RF",
-    "instance": null,
     "targetOverrides": null
   }
 ]

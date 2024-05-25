@@ -3,20 +3,18 @@ const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
 export class GameManager extends Component {
+    @property(Node)
+    private gameFinishPanel;
 
     @property({
         type: Label
     })
-    public scoreLabel;
+    private scoreLabel;
 
     currentScore:number;
 
     protected start(): void {
         this.reset();
-    }
-
-    update(deltaTime: number) {
-        
     }
 
     addScore()
@@ -38,5 +36,10 @@ export class GameManager extends Component {
     reset()
     {
         this.updateScore(0);
+    }
+
+    public onGameOver()
+    {
+        this.gameFinishPanel.active = true;
     }
 }

@@ -1,11 +1,9 @@
-import { _decorator, Component, instantiate, Node, Prefab } from 'cc';
-const { ccclass, property } = _decorator;
+import { instantiate, Node, Prefab } from 'cc';
 
-@ccclass
 export class ObjectPool{
-    public prefab:Prefab = null;
-    public arr:Node[] = [];
-    public arrSize : number = 0;
+    private prefab:Prefab = null;
+    private arr:Node[] = [];
+    private arrSize : number = 0;
 
     constructor(prefab:Prefab) {
         this.prefab = prefab;
@@ -20,6 +18,7 @@ export class ObjectPool{
         }
 
         let obj = instantiate(this.prefab);
+
         this.arrSize = this.arr.push(obj);
         return obj;
     }
