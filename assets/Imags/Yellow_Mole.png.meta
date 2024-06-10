@@ -20,8 +20,8 @@
         "imageUuidOrDatabaseUri": "2764dd4d-2f99-4fdc-b09f-4f20776b031c",
         "isUuid": true,
         "visible": false,
-        "minfilter": "linear",
-        "magfilter": "linear",
+        "minfilter": "nearest",
+        "magfilter": "nearest",
         "mipfilter": "none",
         "anisotropy": 0
       },
@@ -51,7 +51,7 @@
         "rawWidth": 100,
         "rawHeight": 100,
         "borderTop": 0,
-        "borderBottom": 0,
+        "borderBottom": 13.2,
         "borderLeft": 0,
         "borderRight": 0,
         "packable": true,
@@ -129,6 +129,7 @@
     "type": "sprite-frame",
     "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "2764dd4d-2f99-4fdc-b09f-4f20776b031c@f9941"
+    "redirect": "2764dd4d-2f99-4fdc-b09f-4f20776b031c@f9941",
+    "flipVertical": false
   }
 }
