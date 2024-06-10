@@ -1,6 +1,7 @@
-import { _decorator, Component, Node, find, Vec3 } from 'cc';
+import { _decorator, Component, Node, find, Vec3, Prefab, tween } from 'cc';
 import { MoleGenerator } from './MoleGenerator';
 import { GameManager } from './GameManager';
+import { CatHandGenerator } from './InGame/CatHandGenerator';
 const { ccclass, property } = _decorator;
 
 @ccclass('Mole')
@@ -9,7 +10,8 @@ export class Mole extends Component {
     private gameManager:GameManager;
 
     private moleGenerator: MoleGenerator;
-    private parentIdx;
+    private parentIdx: number;
+    private catHandGenerator: CatHandGenerator;
 
     @property(Number)
     public deletedTime: number = 1000;
@@ -18,13 +20,14 @@ export class Mole extends Component {
     onEnable(): void {
         this.timeOutId = setTimeout(function() {
             this.despawnMole();
-        }.bind(this), this.deletedTime)
+        }.bind(this), this.deletedTime);
     }
 
-    public Init(mg:MoleGenerator, pi:number)
+    public Init(mg:MoleGenerator, pi:number, ch:CatHandGenerator)
     {
         this.moleGenerator = mg;
         this.parentIdx = pi;
+        this.catHandGenerator = ch;
     }
 
     start() {
@@ -40,6 +43,8 @@ export class Mole extends Component {
         
             this.despawnMole();
             this.gameManager.addScore();
+            
+            this.catHandGenerator.generateEffect(this.node.parent.position);
         })
     }
     
@@ -47,5 +52,6 @@ export class Mole extends Component {
     {
         this.moleGenerator.despawnMole(this.parentIdx);
         this.node.active = false;
+
     }
 }

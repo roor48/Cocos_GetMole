@@ -11,9 +11,6 @@ export class GameManager extends Component {
     })
     private scoreLabel;
 
-    @property(ImageAsset)
-    private cursorImage : ImageAsset = null;
-
     currentScore:number;
 
     protected start(): void {
@@ -39,11 +36,6 @@ export class GameManager extends Component {
     init()
     {
         this.updateScore(0);
-
-        const canvas = document.getElementById("GameCanvas");
-        // 기본 커서 지정 x: 35, y: 30
-        // 로드 실패 시 auto(기본값)로 로드
-        canvas.style.cursor = `url("${this.cursorImage.nativeUrl}") 35 30, auto`;
     }
 
     public onGameOver()

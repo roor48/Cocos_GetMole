@@ -2,6 +2,7 @@ import { _decorator, Component, find, instantiate, Node, Prefab, Vec3, resources
 import { ObjectPool } from './ObjectPool';
 import { Mole } from './Mole';
 import { GameManager } from './GameManager';
+import { CatHandGenerator } from './InGame/CatHandGenerator';
 const { ccclass, property } = _decorator;
 
 const getRandomInt = (min:number,max:number) => {
@@ -32,7 +33,10 @@ export class MoleGenerator extends Component {
     })
     public molePrefab: Prefab;
 
-    public molePool: ObjectPool;
+    @property(CatHandGenerator)
+    private catHandGenerator: CatHandGenerator;
+
+    private molePool: ObjectPool;
 
     public moleParents : Node[] = [];
 
@@ -57,11 +61,9 @@ export class MoleGenerator extends Component {
 
 
     private createMole;
-    private canvas;
 
     start() {
         this.gameManager = find('GameManager').getComponent(GameManager);
-        this.canvas = find('Canvas');
         this.molePool = new ObjectPool(this.molePrefab);
 
         for (let i = 0; i < this.node.children.length; i++) {
@@ -125,7 +127,7 @@ export class MoleGenerator extends Component {
         this.createMole.setParent(this.moleParents[this.emptySpawnPoints[ranNum]]);
         this.createMole.setPosition(Vec3.ZERO);
         
-        this.createMole.getComponent(Mole).Init(this, this.emptySpawnPoints[ranNum]);
+        this.createMole.getComponent(Mole).Init(this, this.emptySpawnPoints[ranNum], this.catHandGenerator);
         this.emptySpawnPoints.splice(ranNum,1);
         
         
