@@ -1,7 +1,7 @@
-import { _decorator, Component, Node, find, Vec3, Prefab, tween, Animation } from 'cc';
-import { MoleGenerator } from './MoleGenerator';
+import { _decorator, Component, Node, find, Animation } from 'cc';
 import { GameManager } from './GameManager';
 import { CatHandGenerator } from './InGame/CatHandGenerator';
+import { MoleGenerator } from './MoleGenerator';
 const { ccclass, property } = _decorator;
 
 @ccclass('Mole')
@@ -22,12 +22,10 @@ export class Mole extends Component {
     private isCanTouch: boolean;
     
     start() {
-        console.log("Start");
         this.initListner();
         this.gameManager = find("GameManager").getComponent(GameManager);
         this.moleGenerator = find("Canvas").getChildByName("MoleGenerator").getComponent(MoleGenerator);
         this.catHandGenerator = find("Canvas").getChildByName("CatHandGenerator").getComponent(CatHandGenerator);
-        console.log(this.moleGenerator.name, this.catHandGenerator.name);
 
         this.animation = this.getComponent(Animation);
         
@@ -55,8 +53,6 @@ export class Mole extends Component {
 
 
     initListner(){
-        // input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
-
         this.node.on(Node.EventType.TOUCH_START, () => {
             if (this.isCanTouch) {
                 clearTimeout(this.despawnTimeId);
