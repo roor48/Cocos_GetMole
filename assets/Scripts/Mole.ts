@@ -68,6 +68,7 @@ export class Mole extends Component {
     
     despawnMole() {
         if (this.isCanTouch) {
+            this.isCanTouch = false;
             clearTimeout(this.delayAnimationId);
             this.delayAnimationId = setTimeout(function() {
                 this.moleGenerator.despawnMole(this);
