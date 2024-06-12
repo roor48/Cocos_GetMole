@@ -5,7 +5,7 @@ import { GameManager } from './GameManager';
 import { CatHandGenerator } from './InGame/CatHandGenerator';
 const { ccclass, property } = _decorator;
 
-const getRandomInt = (min:number,max:number) => {
+const getRandomInt = (min:number,max:number):number => {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
@@ -36,8 +36,6 @@ export class MoleGenerator extends Component {
     @property(CatHandGenerator)
     private catHandGenerator: CatHandGenerator;
 
-    private molePool: ObjectPool;
-
     public moleParents : Node[] = [];
 
     @property(Number)
@@ -56,19 +54,21 @@ export class MoleGenerator extends Component {
     public data : GenerateInformation[] = [];
 
     // 비어있는 포인트들
-    @property([Number])
-    private emptySpawnPoints: number[] = [];
+    // @property([Number])
+    // public notUsingSpawnPoints: number[] = [];
+    // @property([Number])
+    // public usingSpawnPoints: number[] = [];
+    @property([Mole])
+    public moles: Mole[] = [];
 
-
-    private createMole;
 
     start() {
         this.gameManager = find('GameManager').getComponent(GameManager);
-        this.molePool = new ObjectPool(this.molePrefab);
 
         for (let i = 0; i < this.node.children.length; i++) {
             this.moleParents.push(this.node.children[i]);
-            this.emptySpawnPoints.push(i);
+            // this.notUsingSpawnPoints.push(i);
+            this.moles.push(this.moleParents[i].children[0].getComponent(Mole));
         }
         
         resources.load('MoleSpawnData', TextAsset, (err, textAsset) => {
@@ -120,17 +120,24 @@ export class MoleGenerator extends Component {
             return;
         }
         
-        this.createMole = this.molePool.getNode();
+       
+        let ranNum = getRandomInt(0, this.moles.length);
+        var selectedMole: Mole = this.moles[ranNum];
+
+        this.moles.splice(ranNum, 1);
+
+        // let ranNum = getRandomInt(0, this.notUsingSpawnPoints.length);
+        // var selectedMole: Mole = this.moles[this.notUsingSpawnPoints[ranNum]];
+
+
+        // this.usingSpawnPoints.push(ranNum);
+        // this.notUsingSpawnPoints.splice(ranNum,1);
         
         
-        let ranNum:number = getRandomInt(0, this.emptySpawnPoints.length);
-        this.createMole.setParent(this.moleParents[this.emptySpawnPoints[ranNum]]);
-        this.createMole.setPosition(Vec3.ZERO);
+        selectedMole.node.setPosition(Vec3.ZERO);
         
-        this.createMole.getComponent(Mole).Init(this, this.emptySpawnPoints[ranNum], this.catHandGenerator);
-        this.emptySpawnPoints.splice(ranNum,1);
-        
-        
+        selectedMole.Spawn();
+
         this.curSpawnCount++;
         if (this.curSpawnCount >= this.maxSpawnCount) {
             this.dataIdx++;
@@ -147,11 +154,12 @@ export class MoleGenerator extends Component {
         this.curSpawnDelay = this.maxSpawnDelay;
     }
     
-    despawnMole(addNum:number)
+    despawnMole(usedMole: Mole)
     {
-        this.emptySpawnPoints.push(addNum);
+        this.moles.push(usedMole);
+        // this.notUsingSpawnPoints.push(usedMole);
         
-        if (this.isSpawnAll && this.emptySpawnPoints.length == this.moleParents.length) {
+        if (this.isSpawnAll && this.moles.length === this.moleParents.length) {
             this.gameManager.onGameOver();
             console.log("Spawn Finish!");
         }

@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, find, Vec3, Prefab, tween } from 'cc';
+import { _decorator, Component, Node, find, Vec3, Prefab, tween, Animation } from 'cc';
 import { MoleGenerator } from './MoleGenerator';
 import { GameManager } from './GameManager';
 import { CatHandGenerator } from './InGame/CatHandGenerator';
@@ -9,49 +9,78 @@ export class Mole extends Component {
 
     private gameManager:GameManager;
 
+    private animation: Animation;
+
     private moleGenerator: MoleGenerator;
-    private parentIdx: number;
     private catHandGenerator: CatHandGenerator;
 
     @property(Number)
     public deletedTime: number = 1000;
-    private timeOutId: number;
+    private despawnTimeId: number;
+    private delayAnimationId: number;
+
+    private isCanTouch: boolean;
     
-    onEnable(): void {
-        this.timeOutId = setTimeout(function() {
+    start() {
+        console.log("Start");
+        this.initListner();
+        this.gameManager = find("GameManager").getComponent(GameManager);
+        this.moleGenerator = find("Canvas").getChildByName("MoleGenerator").getComponent(MoleGenerator);
+        this.catHandGenerator = find("Canvas").getChildByName("CatHandGenerator").getComponent(CatHandGenerator);
+        console.log(this.moleGenerator.name, this.catHandGenerator.name);
+
+        this.animation = this.getComponent(Animation);
+        
+        this.animation.defaultClip = this.animation.clips[3];
+        this.animation.play();
+        
+        this.isCanTouch = false;
+
+    }
+    
+    public Spawn()
+    {
+        if (!this.animation)
+            this.animation = this.getComponent(Animation);
+        
+        this.animation.defaultClip = this.animation.clips[0];
+        this.animation.play();
+
+        this.isCanTouch = true;
+
+        this.despawnTimeId = setTimeout(function() {
             this.despawnMole();
         }.bind(this), this.deletedTime);
     }
 
-    public Init(mg:MoleGenerator, pi:number, ch:CatHandGenerator)
-    {
-        this.moleGenerator = mg;
-        this.parentIdx = pi;
-        this.catHandGenerator = ch;
-    }
-
-    start() {
-        this.initListner();
-        this.gameManager = find("GameManager").getComponent(GameManager);
-    }
 
     initListner(){
         // input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
 
         this.node.on(Node.EventType.TOUCH_START, () => {
-            clearTimeout(this.timeOutId);
-        
-            this.despawnMole();
-            this.gameManager.addScore();
-            
-            this.catHandGenerator.generateEffect(this.node.parent.position);
+            if (this.isCanTouch) {
+                clearTimeout(this.despawnTimeId);
+                this.despawnMole();
+
+                this.isCanTouch = false;
+                
+                this.gameManager.addScore();
+                this.catHandGenerator.generateEffect(this.node.parent.position);
+            }
         })
     }
     
-    despawnMole()
-    {
-        this.moleGenerator.despawnMole(this.parentIdx);
-        this.node.active = false;
+    despawnMole() {
+        if (this.isCanTouch) {
+            clearTimeout(this.delayAnimationId);
+            this.delayAnimationId = setTimeout(function() {
+                this.moleGenerator.despawnMole(this);
+            }.bind(this), 1000);
 
+            // this.moleGenerator.despawnMole(this);
+    
+            this.animation.defaultClip = this.animation.clips[2];
+            this.animation.play();
+        }
     }
 }
