@@ -134,7 +134,7 @@ export class MoleGenerator extends Component {
         // this.notUsingSpawnPoints.splice(ranNum,1);
         
         
-        selectedMole.node.setPosition(Vec3.ZERO);
+        // selectedMole.node.setPosition(Vec3.ZERO);
         
         selectedMole.Spawn();
 
