@@ -64,6 +64,9 @@ export class Mole extends Component {
         if (this.animation.defaultClip.name == "Death") {
             this.isCanTouch = false;
             this.moleGenerator.despawnMole(this);
+
+            this.animation.defaultClip = this.animation.clips[3];
+            this.animation.play();
         }
     }
 
