@@ -1,8 +1,8 @@
 import { _decorator, Component, Node, find, Animation } from 'cc';
 import { GameManager } from './GameManager';
-import { CatHandGenerator } from './InGame/CatHandGenerator';
+import { CatHandGenerator } from '././CatHandGenerator';
 import { MoleGenerator } from './MoleGenerator';
-import { GenerateHammer } from './InGame/HammerGenerator';
+import { GenerateHammer } from '././HammerGenerator';
 const { ccclass, property } = _decorator;
 
 @ccclass('Mole')

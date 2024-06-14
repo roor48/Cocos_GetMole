@@ -1,5 +1,5 @@
 import { _decorator, Component, Node, Prefab, Quat, Vec3, misc, Vec2, random } from 'cc';
-import { ObjectPool } from '../ObjectPool';
+import { ObjectPool } from '././ObjectPool';
 const { ccclass, property } = _decorator;
 
 const getRandom = (min:number,max:number) => {
@@ -20,6 +20,7 @@ export class CatHandGenerator extends Component {
 
     public generateEffect(position: Vec3)
     {
+        return;
         let newCatHand = this.pool.getNode();
 
         // -60도에서 60도 사이의 랜덤 각도 생성

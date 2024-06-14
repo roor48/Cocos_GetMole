@@ -1,5 +1,5 @@
 import { _decorator, Component, Input, input, Size, view, Vec3, Prefab } from 'cc';
-import { ObjectPool } from '../ObjectPool';
+import { ObjectPool } from '././ObjectPool';
 const { ccclass, property } = _decorator;
 
 @ccclass('GenerateHammer')
@@ -7,6 +7,11 @@ export class GenerateHammer extends Component {
 
     @property(Prefab)
     public hammerPrefab: Prefab;
+
+    @property(Vec3)
+    public offset: Vec3 = new Vec3();
+
+
     private pool: ObjectPool;
 
     start() {
@@ -39,7 +44,7 @@ export class GenerateHammer extends Component {
     public generateHammer(pos: Vec3) {
         var newHammer = this.pool.getNode();
 
-        newHammer.position = pos;
+        newHammer.position = new Vec3(pos.x + this.offset.x, pos.y + this.offset.y, 0);
         newHammer.setParent(this.node);
     }
 }

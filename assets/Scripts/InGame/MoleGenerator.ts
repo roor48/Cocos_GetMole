@@ -2,7 +2,7 @@ import { _decorator, Component, find, instantiate, Node, Prefab, Vec3, resources
 import { ObjectPool } from './ObjectPool';
 import { Mole } from './Mole';
 import { GameManager } from './GameManager';
-import { CatHandGenerator } from './InGame/CatHandGenerator';
+import { CatHandGenerator } from '././CatHandGenerator';
 const { ccclass, property } = _decorator;
 
 const getRandomInt = (min:number,max:number):number => {
