@@ -2,6 +2,7 @@ import { _decorator, Component, Node, find, Animation } from 'cc';
 import { GameManager } from './GameManager';
 import { CatHandGenerator } from './InGame/CatHandGenerator';
 import { MoleGenerator } from './MoleGenerator';
+import { GenerateHammer } from './InGame/HammerGenerator';
 const { ccclass, property } = _decorator;
 
 @ccclass('Mole')
@@ -13,11 +14,11 @@ export class Mole extends Component {
 
     private moleGenerator: MoleGenerator;
     private catHandGenerator: CatHandGenerator;
+    private hammerGenerator: GenerateHammer;
 
     @property(Number)
     public deletedTime: number = 1000;
     private despawnTimeId: number;
-    private delayAnimationId: number;
 
     private isCanTouch: boolean;
     
@@ -26,6 +27,7 @@ export class Mole extends Component {
         this.gameManager = find("GameManager").getComponent(GameManager);
         this.moleGenerator = find("Canvas").getChildByName("MoleGenerator").getComponent(MoleGenerator);
         this.catHandGenerator = find("Canvas").getChildByName("CatHandGenerator").getComponent(CatHandGenerator);
+        this.hammerGenerator = find("Canvas").getChildByName("HammerGenerator").getComponent(GenerateHammer);
 
         this.animation = this.getComponent(Animation);
         
@@ -34,21 +36,35 @@ export class Mole extends Component {
         
         this.isCanTouch = false;
 
+
+        this.animation.on(Animation.EventType.FINISHED, this.onAnimationFinished, this);
+    }
+
+    protected update(dt: number): void {
     }
     
-    public Spawn()
-    {
+    public Spawn() {
         if (!this.animation)
             this.animation = this.getComponent(Animation);
         
         this.animation.defaultClip = this.animation.clips[0];
         this.animation.play();
-
+        
         this.isCanTouch = true;
-
+        
         this.despawnTimeId = setTimeout(function() {
-            this.despawnMole();
-        }.bind(this), this.deletedTime);
+            this.animation.defaultClip = this.animation.clips[2];
+            this.animation.play();
+            
+            this.animation.time
+            }.bind(this), this.deletedTime);
+    }
+            
+    private onAnimationFinished() {
+        if (this.animation.defaultClip.name == "Death") {
+            this.isCanTouch = false;
+            this.moleGenerator.despawnMole(this);
+        }
     }
 
 
@@ -62,20 +78,13 @@ export class Mole extends Component {
                 
                 this.gameManager.addScore();
                 this.catHandGenerator.generateEffect(this.node.parent.position);
+                this.hammerGenerator.generateHammer(this.node.parent.position);
             }
         })
     }
     
     despawnMole() {
         if (this.isCanTouch) {
-            this.isCanTouch = false;
-            clearTimeout(this.delayAnimationId);
-            this.delayAnimationId = setTimeout(function() {
-                this.moleGenerator.despawnMole(this);
-            }.bind(this), 1000);
-
-            // this.moleGenerator.despawnMole(this);
-    
             this.animation.defaultClip = this.animation.clips[2];
             this.animation.play();
         }
