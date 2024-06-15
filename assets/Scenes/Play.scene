@@ -164,6 +164,9 @@
     "scoreLabel": {
       "__id__": 13
     },
+    "gameFinishLabel": {
+      "__id__": 120
+    },
     "_id": "6fN05t115CD5qT2aIIi2wS"
   },
   {
@@ -2556,8 +2559,8 @@
     },
     "offset": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 50,
+      "y": 50,
       "z": 0
     },
     "_id": "7cO4KZulhDsrnGRMOOyPmY"
@@ -2690,8 +2693,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 382.3721923828125,
-      "height": 58.086000000000006
+      "width": 295.2197570800781,
+      "height": 61.019999999999996
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2716,17 +2719,17 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 255,
+      "g": 66,
       "b": 255,
       "a": 255
     },
-    "_string": "GameFinished",
+    "_string": "축하합니다!\n2147483647 point를 획득 하였습니다",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 58.8,
-    "_fontSize": 58.8,
+    "_actualFontSize": 22.8,
+    "_fontSize": 22.8,
     "_fontFamily": "Arial",
-    "_lineHeight": 46.1,
+    "_lineHeight": 27,
     "_overflow": 0,
     "_enableWrapText": true,
     "_font": null,
@@ -2774,8 +2777,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 540,
-      "height": 1000
+      "width": 443.2,
+      "height": 108.2
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2799,13 +2802,13 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 204
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "ffb88a8f-af62-48f4-8f1d-3cb606443a43@f9941",
+      "__uuid__": "7d8f9b89-4fd1-4c9f-a3ab-38ec7cded7ca@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
