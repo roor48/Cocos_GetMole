@@ -38,9 +38,8 @@ export class Mole extends Component {
 
 
         this.animation.on(Animation.EventType.FINISHED, this.onAnimationFinished, this);
-    }
 
-    protected update(dt: number): void {
+        this.node.active = false;
     }
     
     public Spawn() {
@@ -55,8 +54,6 @@ export class Mole extends Component {
         this.despawnTimeId = setTimeout(function() {
             this.animation.defaultClip = this.animation.clips[2];
             this.animation.play();
-            
-            this.animation.time
             }.bind(this), this.deletedTime);
     }
             

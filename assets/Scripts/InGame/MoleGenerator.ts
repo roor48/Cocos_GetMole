@@ -124,6 +124,8 @@ export class MoleGenerator extends Component {
         let ranNum = getRandomInt(0, this.moles.length);
         var selectedMole: Mole = this.moles[ranNum];
 
+        selectedMole.node.active = true;
+
         this.moles.splice(ranNum, 1);
 
         // let ranNum = getRandomInt(0, this.notUsingSpawnPoints.length);
@@ -156,6 +158,7 @@ export class MoleGenerator extends Component {
     
     despawnMole(usedMole: Mole)
     {
+        usedMole.node.active = false;
         this.moles.push(usedMole);
         // this.notUsingSpawnPoints.push(usedMole);
         

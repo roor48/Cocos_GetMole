@@ -10,6 +10,8 @@ export class GameManager extends Component {
         type: Label
     })
     private scoreLabel;
+    @property(Label)
+    public gameFinishLabel;
 
     currentScore:number;
 
@@ -40,6 +42,7 @@ export class GameManager extends Component {
 
     public onGameOver()
     {
+        this.gameFinishLabel.string = `축하합니다!\n${this.currentScore} points를 획득 하였습니다`;
         this.gameFinishPanel.active = true;
     }
 }
