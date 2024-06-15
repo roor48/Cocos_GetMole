@@ -285,6 +285,8 @@
     },
     "_enabled": true,
     "__prefab": null,
+    "screenWidth": 540,
+    "screenHeight": 1000,
     "_id": "51xHX+jOJEvqmyW0ORTChu"
   },
   {
