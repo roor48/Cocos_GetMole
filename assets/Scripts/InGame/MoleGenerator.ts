@@ -1,8 +1,6 @@
 import { _decorator, Component, find, instantiate, Node, Prefab, Vec3, resources, TextAsset, CCInteger } from 'cc';
-import { ObjectPool } from './ObjectPool';
 import { Mole } from './Mole';
 import { GameManager } from './GameManager';
-import { CatHandGenerator } from '././CatHandGenerator';
 const { ccclass, property } = _decorator;
 
 const getRandomInt = (min:number,max:number):number => {
@@ -27,15 +25,6 @@ export class GenerateInformation {
 export class MoleGenerator extends Component {
     private gameManager:GameManager;
 
-    @property({
-        type: Prefab,
-        tooltip: 'Put Mole Prefab Here'
-    })
-    public molePrefab: Prefab;
-
-    @property(CatHandGenerator)
-    private catHandGenerator: CatHandGenerator;
-
     public moleParents : Node[] = [];
 
     @property(Number)
@@ -53,11 +42,6 @@ export class MoleGenerator extends Component {
     @property([GenerateInformation])
     public data : GenerateInformation[] = [];
 
-    // 비어있는 포인트들
-    // @property([Number])
-    // public notUsingSpawnPoints: number[] = [];
-    // @property([Number])
-    // public usingSpawnPoints: number[] = [];
     @property([Mole])
     public moles: Mole[] = [];
 
@@ -128,15 +112,6 @@ export class MoleGenerator extends Component {
 
         this.moles.splice(ranNum, 1);
 
-        // let ranNum = getRandomInt(0, this.notUsingSpawnPoints.length);
-        // var selectedMole: Mole = this.moles[this.notUsingSpawnPoints[ranNum]];
-
-
-        // this.usingSpawnPoints.push(ranNum);
-        // this.notUsingSpawnPoints.splice(ranNum,1);
-        
-        
-        // selectedMole.node.setPosition(Vec3.ZERO);
         
         selectedMole.Spawn();
 
@@ -160,7 +135,6 @@ export class MoleGenerator extends Component {
     {
         usedMole.node.active = false;
         this.moles.push(usedMole);
-        // this.notUsingSpawnPoints.push(usedMole);
         
         if (this.isSpawnAll && this.moles.length === this.moleParents.length) {
             this.gameManager.onGameOver();

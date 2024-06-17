@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, find, Animation } from 'cc';
 import { GameManager } from './GameManager';
-import { CatHandGenerator } from '././CatHandGenerator';
 import { MoleGenerator } from './MoleGenerator';
 import { GenerateHammer } from '././HammerGenerator';
 const { ccclass, property } = _decorator;
@@ -13,7 +12,6 @@ export class Mole extends Component {
     private animation: Animation;
 
     private moleGenerator: MoleGenerator;
-    private catHandGenerator: CatHandGenerator;
     private hammerGenerator: GenerateHammer;
 
     @property(Number)
@@ -26,7 +24,6 @@ export class Mole extends Component {
         this.initListner();
         this.gameManager = find("GameManager").getComponent(GameManager);
         this.moleGenerator = find("Canvas").getChildByName("MoleGenerator").getComponent(MoleGenerator);
-        this.catHandGenerator = find("Canvas").getChildByName("CatHandGenerator").getComponent(CatHandGenerator);
         this.hammerGenerator = find("Canvas").getChildByName("HammerGenerator").getComponent(GenerateHammer);
 
         this.animation = this.getComponent(Animation);
@@ -77,7 +74,6 @@ export class Mole extends Component {
                 this.isCanTouch = false;
                 
                 this.gameManager.addScore();
-                this.catHandGenerator.generateEffect(this.node.parent.position);
                 this.hammerGenerator.generateHammer(this.node.parent.position);
             }
         })
