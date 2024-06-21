@@ -2,6 +2,7 @@ import { _decorator, Component, Node, find, Animation, AudioSource } from 'cc';
 import { GameManager } from './GameManager';
 import { MoleGenerator } from './MoleGenerator';
 import { GenerateHammer } from '././HammerGenerator';
+import { UserSettings } from '../UserSettings';
 const { ccclass, property } = _decorator;
 
 @ccclass('Mole')
@@ -73,7 +74,10 @@ export class Mole extends Component {
             if (this.isCanTouch) {
                 clearTimeout(this.despawnTimeId);
                 this.despawnMole();
-                this.audioSource.play();
+
+                if (UserSettings.instance.isSoundOn) {
+                    this.audioSource.play();
+                }
 
                 this.isCanTouch = false;
                 

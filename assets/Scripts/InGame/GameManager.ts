@@ -1,4 +1,5 @@
-import { _decorator, Component, Node, Label, RichText } from 'cc';
+import { _decorator, Component, Node, Label, RichText, AudioSource } from 'cc';
+import { UserSettings } from '../UserSettings';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
@@ -20,6 +21,10 @@ export class GameManager extends Component {
 
     protected start(): void {
         this.init();
+
+        if (UserSettings.instance.isSoundOn) {
+            this.getComponent(AudioSource).play();
+        }
     }
 
     addScore()

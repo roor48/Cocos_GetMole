@@ -3141,9 +3141,9 @@
       "__expectedType__": "cc.AudioClip"
     },
     "_loop": true,
-    "_playOnAwake": true,
+    "_playOnAwake": false,
     "_volume": 1,
-    "_id": "1fWnZnuo1HqIH+6mrTT94X"
+    "_id": "08g9oM99tIwqms6z1zR1/Z"
   },
   {
     "__type__": "cc.PrefabInfo",
