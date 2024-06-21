@@ -76,6 +76,7 @@ export class Mole extends Component {
                 this.despawnMole();
 
                 if (UserSettings.instance.isSoundOn) {
+                    this.audioSource.stop();
                     this.audioSource.play();
                 }
 

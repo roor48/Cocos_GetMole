@@ -5,9 +5,10 @@ const { ccclass, property } = _decorator;
 export class UserSettings extends Component {
     private static _instance: UserSettings = null;
     public static get instance(): UserSettings {
-        if (this._instance == null) {
+        if (!this._instance) {
             let newNode = new Node();
             newNode.addComponent(UserSettings);
+            newNode.parent = director.getScene().getChildByName("Canvas").parent;
         }
         return this._instance;
     }
