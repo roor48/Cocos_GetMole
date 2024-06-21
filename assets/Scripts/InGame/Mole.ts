@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, find, Animation } from 'cc';
+import { _decorator, Component, Node, find, Animation, AudioSource } from 'cc';
 import { GameManager } from './GameManager';
 import { MoleGenerator } from './MoleGenerator';
 import { GenerateHammer } from '././HammerGenerator';
@@ -10,6 +10,8 @@ export class Mole extends Component {
     private gameManager:GameManager;
 
     private animation: Animation;
+
+    private audioSource: AudioSource;
 
     private moleGenerator: MoleGenerator;
     private hammerGenerator: GenerateHammer;
@@ -27,6 +29,7 @@ export class Mole extends Component {
         this.hammerGenerator = find("Canvas").getChildByName("HammerGenerator").getComponent(GenerateHammer);
 
         this.animation = this.getComponent(Animation);
+        this.audioSource = this.getComponent(AudioSource);
         
         this.animation.defaultClip = this.animation.clips[3];
         this.animation.play();
@@ -53,7 +56,7 @@ export class Mole extends Component {
             this.animation.play();
             }.bind(this), this.deletedTime);
     }
-            
+
     private onAnimationFinished() {
         if (this.animation.defaultClip.name == "Death") {
             this.isCanTouch = false;
@@ -70,6 +73,7 @@ export class Mole extends Component {
             if (this.isCanTouch) {
                 clearTimeout(this.despawnTimeId);
                 this.despawnMole();
+                this.audioSource.play();
 
                 this.isCanTouch = false;
                 
