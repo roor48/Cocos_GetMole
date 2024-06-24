@@ -2794,7 +2794,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Button",
+    "_name": "ExitBtn",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {

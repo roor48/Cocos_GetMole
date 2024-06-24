@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, RichText, AudioSource } from 'cc';
+import { _decorator, Component, Node, Label, RichText, AudioSource, director } from 'cc';
 import { UserSettings } from '../UserSettings';
 const { ccclass, property } = _decorator;
 
@@ -6,6 +6,8 @@ const { ccclass, property } = _decorator;
 export class GameManager extends Component {
     @property(Node)
     private gameFinishPanel;
+
+    private audioSource: AudioSource;
 
     @property({
         type: Label
@@ -22,6 +24,7 @@ export class GameManager extends Component {
     protected start(): void {
         this.init();
 
+        this.audioSource = this.getComponent(AudioSource);
         if (UserSettings.instance.isSoundOn) {
             this.getComponent(AudioSource).play();
         }
@@ -57,6 +60,7 @@ export class GameManager extends Component {
     }
 
     public onExitBtn() {
-        console.log("onExitBtn");
+        this.audioSource.stop();
+        director.loadScene("Main");
     }
 }

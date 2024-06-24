@@ -16,7 +16,7 @@ export class MainMenuManager extends Component {
     }
 
     public GotoPlayScene() {
-        this.audioSource.pause();
+        this.audioSource.stop();
         director.loadScene("Play");
     }
 }
