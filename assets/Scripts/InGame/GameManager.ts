@@ -61,6 +61,11 @@ export class GameManager extends Component {
 
     public onExitBtn() {
         this.audioSource.stop();
+        window.location.href= "https://www.balgurak.com";
+    }
+
+    public onRestartBtn(){
+        this.audioSource.stop();
         director.loadScene("Main");
     }
 }
