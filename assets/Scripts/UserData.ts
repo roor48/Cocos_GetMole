@@ -1,6 +1,7 @@
-import { _decorator, Component, director, Node } from 'cc';
+import { _decorator, Component, director, Node, sys } from 'cc';
+import UserService from './UserService';
+import { UpdateNicknameTxt } from './Main/UpdateNicknameTxt';
 const { ccclass, property } = _decorator;
-
 
 @ccclass('UserData')
 export class UserData extends Component {
@@ -11,30 +12,62 @@ export class UserData extends Component {
         }
         return this._instance;
     }
-
+    
     @property(String)
     private userID: string = "";
-
+    
     public getUserData(): string {
         return this.userID;
     }
 
-    onLoad() {
+    public nicknameTxt:UpdateNicknameTxt = null;
+
+    private userService = new UserService;
+
+    public getHaveData():number{
+        console.log(this.userService.getResultCode() === 200) 
+        return this.userService.getResultCode();
+    }
+
+    protected onLoad() {
         if (UserData._instance) {
             // 이미 인스턴스가 존재하면, 중복된 컴포넌트를 파괴
             this.destroy();
             return;
         }
-
-        this.userID = window.localStorage.getItem("user-info");
-        window.localStorage.removeItem("user-info");
-
-        // 인스턴스 설정
         UserData._instance = this;
-        this.node.name = "UserData";
-
         // 씬 전환 시에도 인스턴스를 유지
         // cc.game.addPersistRootNode(this.node);
         director.addPersistRootNode(this.node);
+    }
+
+    async LoadData(){
+        // LocalStorage에서 데이터 읽기
+        const userInfoString = location.href.split('?')[1];
+        if (userInfoString) {
+            console.log('User ID:', userInfoString);
+            this.userID = userInfoString;
+            // 필요한 작업 수행 (예: 게임 내 UI 업데이트)
+            try {
+                await this.userService.ApiRequest(this.userID);
+                const userData = this.userService.getUserData();
+                const resultCode = this.userService.getResultCode();
+    
+                if (userData && resultCode === 200) {
+                    console.log("resultCode : ", this.userService.getResultCode());
+                    console.log("User data:", userData);
+                    
+                } else {
+                    console.error("Failed to fetch user data.");
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        } else {
+            console.log('No user info found');
+        }
+        this.nicknameTxt.Load();
+        // 인스턴스 설정
+        this.node.name = "UserData";
     }
 }
