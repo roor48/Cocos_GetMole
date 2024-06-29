@@ -1,5 +1,4 @@
 // UserService.ts
-
 interface UserData {
     id: string;
     point: string;
@@ -80,6 +79,39 @@ export default class UserService {
         }
     }
 
+    public async getPointAndStop(userId : string){
+        const requestData = {
+            userid : userId,
+            content:'게임 플레이 보상'
+        }
+
+        const requestOptions: RequestInit = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        };
+
+        try {
+            const response = await fetch(`${this.apiUrl+ '/point/get-points'}`, requestOptions);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const result:ApiResponse = await response.json();
+            if(result.result_code == -1){
+                console.log("이미 지급이 된 상태입니다.");
+                return;
+            }
+
+            console.log("포인트 지급 완료");
+            return null;
+        } catch (error) {
+            console.error('Fetch Error:', error);
+            return null;
+        }
+    }
+
     public async StartGame(userId: string){
         const requestData = {
             userId : userId
@@ -105,5 +137,37 @@ export default class UserService {
             console.error('Fetch Error:', error);
             return null;
         }
+    }
+
+    public async endGame(userId:string, score:number){
+        const requestData = {
+            id : userId,
+            score : score
+        }
+
+        const requestOptions: RequestInit = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        };
+
+        try {
+            const response = await fetch(`${this.apiUrl+ '/game/finish/game'}`, requestOptions);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            console.log("게임 종료");
+            return null;
+        } catch (error) {
+            console.error('Fetch Error:', error);
+            return null;
+        }
+    }
+
+    public async reStartGame(userId:string){
+
     }
 }

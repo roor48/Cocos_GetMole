@@ -26,7 +26,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 138
+      "__id__": 141
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -57,7 +57,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 139
+      "__id__": 142
     },
     "_id": "7d2ca435-0292-416e-a63d-2e35cc6ac5c6"
   },
@@ -82,7 +82,7 @@
         "__id__": 5
       },
       {
-        "__id__": 137
+        "__id__": 140
       }
     ],
     "_prefab": null,
@@ -173,6 +173,9 @@
     "gameFinishText": {
       "__id__": 120
     },
+    "pointGetText": {
+      "__id__": 115
+    },
     "_id": "6fN05t115CD5qT2aIIi2wS"
   },
   {
@@ -194,16 +197,19 @@
         "__id__": 121
       },
       {
-        "__id__": 128
+        "__id__": 124
+      },
+      {
+        "__id__": 131
       }
     ],
     "_active": false,
     "_components": [
       {
-        "__id__": 135
+        "__id__": 138
       },
       {
-        "__id__": 136
+        "__id__": 139
       }
     ],
     "_prefab": null,
@@ -2797,6 +2803,114 @@
   },
   {
     "__type__": "cc.Node",
+    "_name": "Point Get",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "_parent": {
+      "__id__": 6
+    },
+    "_children": [],
+    "_active": false,
+    "_components": [
+      {
+        "__id__": 122
+      },
+      {
+        "__id__": 123
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": -0.591,
+      "y": -120.425,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "39ufPwBbFIn4MUOHDYHmCE"
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 121
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 430,
+      "height": 104.58
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_id": "cagnCXorJMtLrWsaVevRVn"
+  },
+  {
+    "__type__": "cc.RichText",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 121
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_lineHeight": 83,
+    "_string": "<color=#EB00FF>적립금이 적립되었습니다. </color>",
+    "_horizontalAlign": 2,
+    "_verticalAlign": 0,
+    "_fontSize": 41.7,
+    "_fontColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_maxWidth": 430,
+    "_fontFamily": "Arial",
+    "_font": {
+      "__uuid__": "f78df03d-0c96-4546-a968-0cd782701995",
+      "__expectedType__": "cc.TTFFont"
+    },
+    "_isSystemFontUsed": false,
+    "_userDefinedFont": {
+      "__uuid__": "f78df03d-0c96-4546-a968-0cd782701995",
+      "__expectedType__": "cc.TTFFont"
+    },
+    "_cacheMode": 0,
+    "_imageAtlas": null,
+    "_handleTouchEvent": false,
+    "_id": "06hyO1HaNNWqGqxISeMz6K"
+  },
+  {
+    "__type__": "cc.Node",
     "_name": "ExitBtn",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -2805,23 +2919,23 @@
     },
     "_children": [
       {
-        "__id__": 122
+        "__id__": 125
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 125
+        "__id__": 128
       },
       {
-        "__id__": 126
+        "__id__": 129
       }
     ],
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -277.473,
+      "y": -227.207,
       "z": 0
     },
     "_lrot": {
@@ -2853,16 +2967,16 @@
     "_objFlags": 512,
     "__editorExtras__": {},
     "_parent": {
-      "__id__": 121
+      "__id__": 124
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 123
+        "__id__": 126
       },
       {
-        "__id__": 124
+        "__id__": 127
       }
     ],
     "_prefab": null,
@@ -2901,14 +3015,14 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 122
+      "__id__": 125
     },
     "_enabled": true,
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 79.00200000000001
+      "width": 300,
+      "height": 52.038
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2923,7 +3037,7 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 122
+      "__id__": 125
     },
     "_enabled": true,
     "__prefab": null,
@@ -2937,11 +3051,11 @@
       "b": 0,
       "a": 255
     },
-    "_string": "종료",
+    "_string": "종료후 적립금 받기",
     "_horizontalAlign": 1,
     "_verticalAlign": 0,
-    "_actualFontSize": 62.7,
-    "_fontSize": 62.7,
+    "_actualFontSize": 41.3,
+    "_fontSize": 41.3,
     "_fontFamily": "Arial",
     "_lineHeight": 0,
     "_overflow": 3,
@@ -2988,13 +3102,13 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 121
+      "__id__": 124
     },
     "_enabled": true,
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 101,
+      "width": 300,
       "height": 67.3
     },
     "_anchorPoint": {
@@ -3010,13 +3124,13 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 121
+      "__id__": 124
     },
     "_enabled": true,
     "__prefab": null,
     "clickEvents": [
       {
-        "__id__": 127
+        "__id__": 130
       }
     ],
     "_interactable": true,
@@ -3078,16 +3192,16 @@
     },
     "_children": [
       {
-        "__id__": 129
+        "__id__": 132
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 132
+        "__id__": 135
       },
       {
-        "__id__": 133
+        "__id__": 136
       }
     ],
     "_prefab": null,
@@ -3126,16 +3240,16 @@
     "_objFlags": 512,
     "__editorExtras__": {},
     "_parent": {
-      "__id__": 128
+      "__id__": 131
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 130
+        "__id__": 133
       },
       {
-        "__id__": 131
+        "__id__": 134
       }
     ],
     "_prefab": null,
@@ -3174,7 +3288,7 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 129
+      "__id__": 132
     },
     "_enabled": true,
     "__prefab": null,
@@ -3196,7 +3310,7 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 129
+      "__id__": 132
     },
     "_enabled": true,
     "__prefab": null,
@@ -3261,7 +3375,7 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 128
+      "__id__": 131
     },
     "_enabled": true,
     "__prefab": null,
@@ -3283,13 +3397,13 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 128
+      "__id__": 131
     },
     "_enabled": true,
     "__prefab": null,
     "clickEvents": [
       {
-        "__id__": 134
+        "__id__": 137
       }
     ],
     "_interactable": true,
@@ -3461,28 +3575,28 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 140
-    },
-    "shadows": {
-      "__id__": 141
-    },
-    "_skybox": {
-      "__id__": 142
-    },
-    "fog": {
       "__id__": 143
     },
-    "octree": {
+    "shadows": {
       "__id__": 144
     },
-    "skin": {
+    "_skybox": {
       "__id__": 145
     },
-    "lightProbeInfo": {
+    "fog": {
       "__id__": 146
     },
-    "postSettings": {
+    "octree": {
       "__id__": 147
+    },
+    "skin": {
+      "__id__": 148
+    },
+    "lightProbeInfo": {
+      "__id__": 149
+    },
+    "postSettings": {
+      "__id__": 150
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false

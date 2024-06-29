@@ -1,4 +1,4 @@
-import { _decorator, Component, director, Node, sys } from 'cc';
+import { _decorator, BufferAsset, Component, director, Node, sys } from 'cc';
 import UserService from './UserService';
 import { UpdateNicknameTxt } from './Main/UpdateNicknameTxt';
 const { ccclass, property } = _decorator;
@@ -77,6 +77,7 @@ export class UserData extends Component {
             console.log('No user info found');
         }
         this.nicknameTxt.Load();
+        history.pushState(null, null, "hello");
         // 인스턴스 설정
         this.node.name = "UserData";
     }

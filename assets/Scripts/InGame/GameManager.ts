@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Label, RichText, AudioSource, director } from 'cc';
 import { UserSettings } from '../UserSettings';
+import { UserData } from '../UserData';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
@@ -18,6 +19,9 @@ export class GameManager extends Component {
 
     @property(RichText)
     public gameFinishText;
+
+    @property(Node)
+    public pointGetText;
 
     currentScore:number;
 
@@ -56,16 +60,22 @@ export class GameManager extends Component {
         this.gameFinishText.string = '<color=#EB00FF>축하합니다!</color>\n' +
                                      `<size=45><color=#00ff00>${this.currentScore}</color> <color=#0fffff>포인트 획득!</color></size>`;
         // this.gameFinishLabel.string = `축하합니다!\n${this.currentScore} points를 획득 하였습니다`;
+        UserData.instance.getUserService().endGame(UserData.instance.getUserData(), this.currentScore);
+        if(UserData.instance.getRemainTry() == 0){
+            this.pointGetText.active = true;
+        }
         this.gameFinishPanel.active = true;
     }
 
     public onExitBtn() {
         this.audioSource.stop();
+        UserData.instance.getUserService().getPointAndStop(UserData.instance.getUserData());
         window.location.href= "https://www.balgurak.com";
     }
 
     public onRestartBtn(){
         this.audioSource.stop();
+        
         director.loadScene("Main");
     }
 }
