@@ -197,7 +197,7 @@
         "__id__": 128
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 135
@@ -3180,7 +3180,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 270,
       "height": 79.00200000000001
     },
     "_anchorPoint": {
@@ -3210,7 +3210,7 @@
       "b": 0,
       "a": 255
     },
-    "_string": "종료",
+    "_string": "다시하기",
     "_horizontalAlign": 1,
     "_verticalAlign": 0,
     "_actualFontSize": 62.7,
@@ -3267,7 +3267,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 101,
+      "width": 270,
       "height": 67.3
     },
     "_anchorPoint": {

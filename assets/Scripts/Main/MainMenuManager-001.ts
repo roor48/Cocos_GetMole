@@ -21,7 +21,6 @@ export class MainMenuManager extends Component {
             return;
         }
         this.audioSource.stop();
-        UserData.instance.getUserService().StartGame(UserData.instance.getUserData());
         director.loadScene("Play");
     }
 }

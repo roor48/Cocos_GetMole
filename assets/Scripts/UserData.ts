@@ -20,9 +20,18 @@ export class UserData extends Component {
         return this.userID;
     }
 
+    @property(Number)
+    private remainTry: number = 0;
+    public getRemainTry(): number{
+        return this.remainTry;
+    }
+
     public nicknameTxt:UpdateNicknameTxt = null;
 
     private userService = new UserService;
+    public getUserService():UserService{
+        return this.userService;
+    }
 
     public getHaveData():number{
         console.log(this.userService.getResultCode() === 200) 
@@ -52,6 +61,7 @@ export class UserData extends Component {
                 await this.userService.ApiRequest(this.userID);
                 const userData = this.userService.getUserData();
                 const resultCode = this.userService.getResultCode();
+                this.remainTry  = this.userService.getRemainTry();   
     
                 if (userData && resultCode === 200) {
                     console.log("resultCode : ", this.userService.getResultCode());

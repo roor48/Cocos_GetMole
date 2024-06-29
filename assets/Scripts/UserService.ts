@@ -16,6 +16,7 @@ interface ApiResponse {
 export default class UserService {
     private userData: UserData | null = null;
     private resultCode: number | null = null;
+    private remainTry: number | null = null;
 
     constructor() {}
 
@@ -24,6 +25,8 @@ export default class UserService {
         if (response.result_code === 200 && response.data.length > 0) {
             this.resultCode = response.result_code;
             this.userData = response.data[0];
+            this.remainTry = Math.abs(this.userData.gameCount - 3);
+            console.log(this.remainTry)
             console.log("User data saved successfully.");
         } else {
             console.error("Failed to save user data.");
@@ -39,7 +42,11 @@ export default class UserService {
         return this.resultCode;
     }
 
-    private apiUrl: string = 'http://192.168.75.195:8080/api/users';  // API 엔드포인트 URL
+    public getRemainTry(): number | null{
+        return this.remainTry;
+    }
+
+    private apiUrl: string = 'http://localhost:8080/api';  // API 엔드포인트 URL
 
     public async ApiRequest(userId: string): Promise<UserData | null> {
         const requestData = {
@@ -53,9 +60,8 @@ export default class UserService {
             },
             body: JSON.stringify(requestData)
         };
-
         try {
-            const response = await fetch(this.apiUrl, requestOptions);
+            const response = await fetch(`${this.apiUrl+ '/users'}`, requestOptions);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -67,6 +73,33 @@ export default class UserService {
 
             // API에서 받은 첫 번째 사용자 데이터를 반환
             this.saveUserData(data);
+            return null;
+        } catch (error) {
+            console.error('Fetch Error:', error);
+            return null;
+        }
+    }
+
+    public async StartGame(userId: string){
+        const requestData = {
+            userId : userId
+        }
+
+        const requestOptions: RequestInit = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        };
+
+        try {
+            const response = await fetch(`${this.apiUrl+ '/game/start/game'}`, requestOptions);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            console.log(response);
             return null;
         } catch (error) {
             console.error('Fetch Error:', error);
