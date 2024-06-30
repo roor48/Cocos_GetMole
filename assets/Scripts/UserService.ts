@@ -45,7 +45,7 @@ export default class UserService {
         return this.remainTry;
     }
 
-    private apiUrl: string = 'http://localhost:8080/api';  // API 엔드포인트 URL
+    private apiUrl: string = 'http://sv1.hy24.kr:20157/api';  // API 엔드포인트 URL
 
     public async ApiRequest(userId: string): Promise<UserData | null> {
         const requestData = {
