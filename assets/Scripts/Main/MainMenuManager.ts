@@ -24,4 +24,8 @@ export class MainMenuManager extends Component {
         UserData.instance.getUserService().StartGame(UserData.instance.getUserData());
         director.loadScene("Play");
     }
+
+    public GotoHompage(){
+        location.href = "https://www.balgurak.com/";
+    }
 }

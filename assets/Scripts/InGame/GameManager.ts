@@ -43,7 +43,7 @@ export class GameManager extends Component {
     {
         this.currentScore = score;
 
-        if (score == 39){
+        if (this.currentScore == 45){
             this.currentScore = 100;
         }
 

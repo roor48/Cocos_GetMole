@@ -24,7 +24,14 @@ export default class UserService {
         if (response.result_code === 200 && response.data.length > 0) {
             this.resultCode = response.result_code;
             this.userData = response.data[0];
-            this.remainTry = Math.abs(this.userData.gameCount - 3);
+            const remain = this.userData.gameCount;
+            if(remain >= 3){
+                this.remainTry = 0;
+            }
+            else{
+                this.remainTry = Math.abs(this.userData.gameCount - 3);
+            }
+            
             console.log(this.remainTry)
             console.log("User data saved successfully.");
         } else {
